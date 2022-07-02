@@ -8,6 +8,7 @@ export const generateShortURL: RequestHandler = (req, res) => {
         const shortURL = "tier.app/" + newId;
         res.status(201).json({status:"success",data:{shortURL,originalURL}})
     } catch (error) {
-        console.log(error);
+        // log error
+        res.status(500).json({status:"error",message:"Something went wrong, please try later!"});
     }
 }
