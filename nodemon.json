@@ -1,0 +1,6 @@
+{
+    "env":{
+        "CONNECTION_STRING":"MongoDB connection string for dev",
+        "PORT":3000
+    }
+}
