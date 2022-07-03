@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { Shortener } from '../models/shortener';
 import { updateVisit } from "./visit";
 import EventEmitter from 'events';
+import logger from "../logger/logger";
 
 import { MAX_ATTEMPT_FOR_SHORT_URL, SHORT_URL_PATH_BYTE_SIZE, BASE } from '../utils/config';
 
@@ -23,9 +24,7 @@ export const generateShortURL: RequestHandler = async (req, res) => {
 
         res.status(201).json({ status: "success", data: { shortURL: BASE + shortURL } });
     } catch (error: any) {
-        // log error
-        // tslint:disable-next-line:no-console
-        console.log(error.message);
+        logger.error(error.message,error);
         res.status(500).json({ status: "error", message: "Something went wrong, please try later!" });
     }
 }
@@ -40,8 +39,7 @@ export const getOriginalURL: RequestHandler = async (req, res) => {
         }
         return res.status(404).json({ status: "error", message: "URL not found!" });
     } catch (error: any) {
-        // tslint:disable-next-line:no-console
-        console.log(error.message);
+        logger.error(error.message,error);
         return res.status(500).json({ status: "error", message: "Something went wrong, please try later!" });
 
     }
@@ -63,8 +61,7 @@ const getUniqueShortURL = async (): Promise<string> => {
             i++;
         }
     } catch (error: any) {
-        // tslint:disable-next-line:no-console
-        console.log(error.message);
+        logger.error(error.message,error);
         shortURL = "";
     }
     return shortURL;
