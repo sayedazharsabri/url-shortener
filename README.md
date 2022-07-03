@@ -19,7 +19,7 @@ This is a URL shortener project. Tech stack is NodeJS, Express, TypeScript and M
 
 
 # API Calls
-- On development, send body on below URL
+- On development, send request on localhost:3000
 1. To create short URL
 - POST Request: localhost:3000/shorturl/
 - body should be JSON containing originalURL like
