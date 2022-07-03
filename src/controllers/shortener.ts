@@ -13,7 +13,7 @@ export const generateShortURL: RequestHandler = async (req, res) => {
         }
         const shortener = new Shortener({ shortURL, originalURL });
         await shortener.save();
- 
+
         res.status(201).json({ status: "success", data: {  shortURL: BASE + shortURL } });
     } catch (error: any) {
         // log error
@@ -47,7 +47,7 @@ const getUniqueShortURL = async (): Promise<string> => {
         let i = 1;
         while (i < MAX_ATTEMPT_FOR_SHORT_URL) {
             shortURL = crypto.randomBytes(SHORT_URL_PATH_BYTE_SIZE).toString("hex");
-            let result = await Shortener.find({ shortURL });
+            const result = await Shortener.find({ shortURL });
             if (!result || result.length === 0) {
                 break;
             }
