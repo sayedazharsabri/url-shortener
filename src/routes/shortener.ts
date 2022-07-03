@@ -1,8 +1,9 @@
 import express from "express";
-import { generateShortURL } from '../controllers/shortener';
+import { generateShortURL, getOriginalURL } from '../controllers/shortener';
 
 const router = express.Router();
 
 router.post("/", generateShortURL);
+router.get("/:shortURL", getOriginalURL);
 
 export default router;
